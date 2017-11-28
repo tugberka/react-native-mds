@@ -44,7 +44,7 @@
 
 #### Android
 
-1. Download 'mdslib-1.6.0(1)-release.aar' from movesense-mobile-lib repository and put it somewhere under 'android' folder of your app. Preferably create a new folder named 'android/libs' and put it there.
+1. Download 'mdslib-x.x.x-release.aar' from movesense-mobile-lib repository and put it somewhere under 'android' folder of your app. Preferably create a new folder named 'android/libs' and put it there. Minimum supported version is 1.6.0.
 
 2. In 'build.gradle' of your android project, add the following lines (assuming .aar file is in android/libs):
 ```
@@ -57,6 +57,32 @@ allprojects {
     }
 }
 ```
+
+### Troubleshoot
+
+#### Android
+
+1. 'minSdkVersion' needs to be at least 18.
+
+#### iOS
+
+1. You may need to set "Swift Language Version" for Movesense Pod to 3.2 or 4.0. This setting can be found in "Build Settings" of Movesense pod in XCode project of your app.
+
+2. If you get the following error while building your app:
+
+```
+ld: library not found for -lswiftSwiftOnoneSupport for architecture arm64
+```
+
+then you need to add library search path for that library. One of the common places is:
+
+```
+-L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos
+```
+
+However, the correct answer may depend on XCode version.
+
+3. Movesense library doesn't have bitcode support at the moment. You need to disable it for your app as well.
 
 ## Usage
 ```javascript
