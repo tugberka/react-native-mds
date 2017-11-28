@@ -32,6 +32,6 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile(name: 'mdslib', version: '1.6.0(1)-release', ext: 'aar')
+    compile(name: 'mdslib', version: '+', ext: 'aar')
     compile 'com.polidea.rxandroidble:rxandroidble:1.2.3'
 }
