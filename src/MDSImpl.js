@@ -189,9 +189,8 @@ function MDSImpl() {
 		self.subsKeys.push(self.subsKey);
 		self.subsSuccessCbs.push(responseCb);
 		self.subsErrorCbs.push(errorCb);
-		console.log("MDS Subscribing to: " + URI_PREFIX + serial + uri + "key: " + subsKeyStr);
         if (Platform.OS === 'android'){
-          contract["Uri"] = URI_PREFIX + serial + uri;
+          contract["Uri"] =  serial + uri;
           ReactMds.subscribe("suunto://MDS/EventListener", JSON.stringify(contract), subsKeyStr);
         }
         else {

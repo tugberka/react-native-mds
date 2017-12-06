@@ -27,15 +27,12 @@ public class BleScanner {
                 }
             }
         };
-
-        IntentFilter filter = new IntentFilter();
-
-        filter.addAction(BluetoothDevice.ACTION_FOUND);
-
-        context.registerReceiver(receiver, filter);
     }
 
     public void scan() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothDevice.ACTION_FOUND);
+        context.registerReceiver(receiver, filter);
         mBluetoothAdapter.startDiscovery();
     }
 

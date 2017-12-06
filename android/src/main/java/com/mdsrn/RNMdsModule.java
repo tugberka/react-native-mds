@@ -109,7 +109,6 @@ public class RNMdsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void put(@NonNull String uri, String contract, final Callback responseCb, final Callback errorCb) {
-        Log.i(LOG_TAG, "MDSRN PUT uri: " + uri + " contract: " + contract);
         mds.put(uri, contract, new MdsResponseListener() {
             @Override
             public void onSuccess(String s) {
@@ -155,12 +154,9 @@ public class RNMdsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void subscribe(@NonNull String uri, String contract, final String key) {
-        Log.i(LOG_TAG, "MDSRN subscribe uri: " + uri + " contract: " + contract);
-        Log.i(LOG_TAG, "Sending subscribe request to: " + uri + " contract: " + contract);
         MdsSubscription subscription = mds.subscribe(uri, contract, new MdsNotificationListener() {
             @Override
             public void onNotification(String s) {
-                Log.i(LOG_TAG, "Notification arrived: " + s);
                 sendNotificationEvent(key, s);
             }
 
