@@ -10,6 +10,7 @@ function MDSImpl() {
 	self.subsKeys = [];
 	self.subsSuccessCbs = [];
 	self.subsErrorCbs = [];
+	self.mdsEmitter = null;
 	var subscribedToConnectedDevices = false;
 	var connectedDevicesSubscription = -1;
 
@@ -53,6 +54,26 @@ function MDSImpl() {
 
 	}
 
+	this.initMdsEmitter = function () {
+		if (this.mdsEmitter) {
+			return;
+		}
+
+		if (Platform.OS === 'android'){
+			DeviceEventEmitter.addListener('newScannedDevice', this.handleNewScannedDevice);
+			DeviceEventEmitter.addListener('newNotification', this.handleNewNotification);
+			DeviceEventEmitter.addListener('newNotificationError', this.handleNewNotificationError);
+			this.mdsEmitter = true;
+		} else {
+			const mdsEmitter = new NativeEventEmitter(ReactMds);
+
+			scanSubscription = mdsEmitter.addListener('newScannedDevice', this.handleNewScannedDevice);
+			newNotificationSubscription = mdsEmitter.addListener('newNotification', this.handleNewNotification);
+			newNotificationErrorSubscription = mdsEmitter.addListener('newNotificationError', this.handleNewNotificationError);
+			this.mdsEmitter = mdsEmitter;
+		}
+	}
+
 	this.handleNewScannedDevice = function(e: Event) {
 		self.onNewScannedDevice(e.name, e.address);
 	}
@@ -67,17 +88,7 @@ function MDSImpl() {
 
 	this.scan = function(scanHandler) {
 		self.onNewScannedDevice = function (a, b) {scanHandler(a, b);}
-		if (Platform.OS === 'android'){
-			DeviceEventEmitter.addListener('newScannedDevice', this.handleNewScannedDevice);
-			DeviceEventEmitter.addListener('newNotification', this.handleNewNotification);
-			DeviceEventEmitter.addListener('newNotificationError', this.handleNewNotificationError);
-		} else {
-			const mdsEmitter = new NativeEventEmitter(ReactMds);
-
-			scanSubscription = mdsEmitter.addListener('newScannedDevice', this.handleNewScannedDevice);
-			newNotificationSubscription = mdsEmitter.addListener('newNotification', this.handleNewNotification);
-			newNotificationErrorSubscription = mdsEmitter.addListener('newNotificationError', this.handleNewNotificationError);
-		}
+		this.initMdsEmitter();
 		ReactMds.scan();
 	}
 
@@ -95,6 +106,7 @@ function MDSImpl() {
 	}
 
 	this.connect = function(address) {
+		this.initMdsEmitter();
 		ReactMds.connect(address);
 	}
 
