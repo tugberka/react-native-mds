@@ -10,7 +10,7 @@ import Foundation
 
 @objc(ReactMds)
 public final class ReactMds: RCTEventEmitter {
-    let mds = MdsService()
+    lazy var mds = MdsService()
     var subscriptions: Dictionary<String, String>  = [:]
 
     override init() {

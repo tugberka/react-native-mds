@@ -14,6 +14,10 @@ final public class MdsService: NSObject {
         self.mds = MDSWrapper()
         self.bleController = BleController()
     }
+
+    deinit {
+        self.shutdown()
+    }
     
     public func shutdown() {
         self.mds!.deactivate();
