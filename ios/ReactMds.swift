@@ -16,8 +16,12 @@ public final class ReactMds: RCTEventEmitter {
     override init() {
         super.init()
     }
-    
-    @objc open override func supportedEvents() -> [String] {
+
+    @objc static public override func requiresMainQueueSetup() -> Bool {
+        return true;
+    }
+
+    @objc public override func supportedEvents() -> [String] {
         var allEventNames: [String] = ["newScannedDevice", "newNotification", "newNotificationError"]
         return allEventNames
     }
