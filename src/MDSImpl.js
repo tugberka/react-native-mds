@@ -83,7 +83,7 @@ function MDSImpl() {
 	}
 
 	this.handleNewNotificationError = function(e: Event) {
-		self.subsErrorCbs[getIdxFromKey(e.key)](e.notification);
+		self.subsErrorCbs[getIdxFromKey(e.key)](e.error);
 	}
 
 	this.scan = function(scanHandler) {
