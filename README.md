@@ -5,6 +5,14 @@
 
 `$ npm install react-native-mds --save`
 
+### RN 60 and later
+
+add `Movesense` to your `ios/Podfile`
+
+```
+pod 'Movesense', :git => 'ssh://git@altssh.bitbucket.org:443/suunto/movesense-mobile-lib.git'
+```
+
 ### Mostly automatic installation
 
 `$ react-native link react-native-mds`

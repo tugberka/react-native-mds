@@ -8,7 +8,7 @@ final class BleController: NSObject, CBCentralManagerDelegate {
     private var centralManager : CBCentralManager?
     private var scanTimer = Timer() //!< When timer triggers, scanning is stopped
     private var knownDevices = Dictionary<UUID, String>() //!< Map UUID to Serial
-    private var knownDevicesFetched : Optional<() -> ()>
+    private var knownDevicesFetched : Optional<() -> ()> = nil
     var bleOnOff : ((Bool) -> ())?
     private var addDeviceCallback : (MovesenseDevice) -> () = { (device) in }
     
@@ -92,7 +92,7 @@ final class BleController: NSObject, CBCentralManagerDelegate {
     }
     
     private func isMovesense(_ localName: String) -> Bool {
-        let index = localName.characters.index(of: " ") ?? localName.endIndex
+        let index = localName.firstIndex(of: " ") ?? localName.endIndex
         return localName[localName.startIndex..<index] == "Movesense"
     }
     
