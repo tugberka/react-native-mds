@@ -1,23 +1,24 @@
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:4.2.0-alpha02'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         minSdkVersion 18
-        targetSdkVersion 22
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
     }
@@ -26,12 +27,15 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
 }
 
 dependencies {
-    compile 'com.facebook.react:react-native:+'
-    compile(name: 'mdslib', version: '+', ext: 'aar')
-    compile 'com.polidea.rxandroidble:rxandroidble:1.2.3'
+    implementation 'com.facebook.react:react-native:0.20.1'
+    implementation(name: 'mdslib', version: '+', ext: 'aar')
+    implementation "com.polidea.rxandroidble2:rxandroidble:1.11.1"
 }
