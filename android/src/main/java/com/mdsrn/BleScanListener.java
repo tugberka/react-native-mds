@@ -1,7 +1,7 @@
 package com.mdsrn;
 
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public interface BleScanListener {
 
