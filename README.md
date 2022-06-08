@@ -10,7 +10,7 @@
 add `Movesense` to your `ios/Podfile`
 
 ```
-pod 'Movesense', :git => 'ssh://git@altssh.bitbucket.org:443/suunto/movesense-mobile-lib.git'
+ pod 'Movesense', :git => 'ssh://git@altssh.bitbucket.org:443/movesense/movesense-mobile-lib.git'
 ```
 
 ### Mostly automatic installation
